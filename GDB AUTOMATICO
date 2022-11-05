@@ -1,0 +1,8 @@
+Per eseguire gdb automaticamente dopo xinit creare un file nella cartella dove si trova l'eseguibile:
+
+r
+where
+
+E richiamare gdb così:
+
+gdb -x *nome_file_creato* --args *nome_eseguibile* *parametro_1* ... *parametro_n*
