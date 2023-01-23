@@ -1,0 +1,18 @@
+
+// SSH AUTOMATIZZATO E ACCESSO SFTP
+
+Per automatizzare un accesso a un server creare nella cartella ~/.ssh/ un file config
+
+Host 3.75.254.191
+        User ubuntu
+        Hostname 3.75.254.191
+        IdentityFile ~/Documenti/ChiaveWebServer.pem
+
+oppure
+
+Host server.vitalgam.es
+        User ubuntu
+        Hostname server.vitalgam.es
+        IdentityFile ~/Documenti/ChiaveWebServer.pem
+
+Basterà scrivere ssh e tabbare, in questo modo sarà anche possibile accedere automaticamente a SFTP

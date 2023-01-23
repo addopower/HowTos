@@ -1,0 +1,19 @@
+// SALVARE PASSWORD
+
+Attention: This method saves the credentials in plaintext on your PC's disk. Everyone on your computer can access it, e.g. malicious NPM modules.
+
+Run
+
+git config --global credential.helper store
+then
+
+git pull
+provide a username and password and those details will then be remembered later. The credentials are stored in a file on the disk, with the disk permissions of "just user readable/writable" but still in plaintext.
+
+If you want to change the password later
+
+git pull
+Will fail, because the password is incorrect, git then removes the offending user+password from the ~/.git-credentials file, so now re-run
+
+git pull
+to provide a new password so it works as earlier.

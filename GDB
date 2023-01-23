@@ -1,0 +1,16 @@
+
+// GDB AUTOMATICO IN .xinit
+
+Per eseguire gdb automaticamente dopo xinit creare un file nella cartella dove si trova l'eseguibile:
+
+handle SIGPIPE nostop noprint pass
+r
+where
+
+E richiamare gdb così:
+
+gdb -x *nome_file_creato* --args *nome_eseguibile* *parametro_1* ... *parametro_n*
+
+// GDB SI BLOCCA PER SIGPIPE
+
+handle SIGPIPE nostop noprint pass

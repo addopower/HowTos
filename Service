@@ -1,0 +1,15 @@
+crea il file /etc/systemd/system/*nomeservizio*.service
+
+[Unit]
+Description=SlotServer daemon
+
+[Service]
+Restart=always
+RestartSec=3
+User=root
+TasksMax=100000
+WorkingDirectory=/home/ubuntu
+ExecStart=/home/ubuntu/SlotServer
+
+[Install]
+WantedBy=multi-user.target
