@@ -1,0 +1,16 @@
+LOGIN AUTOMATICO ROOT
+
+/lib/systemd/system/getty@.service
+
+ExecStart=-/sbin/agetty --noclear -a root %I $TERM
+
+PARTENZA IN CONSOLE
+
+/etc/default/grub
+
+GRUB_CMDLINE_LINUX_DEFAULT="text"
+GRUB_TERMINAL=console
+
+sudo update-grub
+sudo systemctl enable multi-user.target --force
+sudo systemctl set-default multi-user.target
