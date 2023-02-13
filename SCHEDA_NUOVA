@@ -1,5 +1,7 @@
 LOGIN AUTOMATICO ROOT
 
+Mi raccomando, scrivere uguale, attenzione agli spazi
+
 /lib/systemd/system/getty@.service
 
 ExecStart=-/sbin/agetty --noclear -a root %I $TERM
@@ -14,3 +16,7 @@ GRUB_TERMINAL=console
 sudo update-grub
 sudo systemctl enable multi-user.target --force
 sudo systemctl set-default multi-user.target
+
+RIMUOVERE UNATTENDED-UPGRADES
+
+apt remove unattended-upgrades
