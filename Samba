@@ -1,0 +1,11 @@
+Installa samba e in etc/samba/smb.conf a fine file
+
+[NOME_SHARE]
+path = /path/to
+read only = no
+valid users = root
+
+poi sudo systemctl restart smb
+
+ricorda di impostare la password di root
+smbpasswd -a root
