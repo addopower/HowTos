@@ -1,22 +1,9 @@
-mysql -u root
-mysql -u root -p
-nano /etc/mysql/my.cnf
-sudo nano /etc/mysql/my.cnf
-mysql -u root -p
-sudo nano /etc/mysql/my.cnf
-sudo grep 'temporary password' /var/log/mysql/error.log
-cat /var/log/mysql/error.log
-kill `cat /mysql-data-directory/host_name.pid`
-sudo service mysql stop
-ls
-nano a
-mysqld --init-file=/home/ubuntu/a &
-sudo mysqld --init-file=/home/ubuntu/a &
-mysql -u root -p
-sudo mysql -u root -p
-sudo mysql -u root
 sudo apt install mysql-server
-sudo service mysql start
 sudo mysql -u root
-sudo mysql -u comma6a
-sudo mysql -u comma6a -p
+
+CREATE USER 'utente'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'utente'@'localhost' WITH GRANT OPTION;
+exit
+
+mysql -u utente -p
+CREATE DATABASE NOME_DB;
