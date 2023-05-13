@@ -19,3 +19,6 @@ poi fai
 sudo systemctl daemon-reload 
 sudo systemctl enable SlotServer.service 
 sudo systemctl start SlotServer.service
+
+per debuggare basta mettere
+ExecStart=gdb -x gdbargs --args /home/ubuntu/SlotServer
