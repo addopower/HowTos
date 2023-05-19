@@ -25,6 +25,4 @@ IN UBUNTU 22.04
 
 apt remove brltty
 
-apt install mpv
-
-apt install socat
+apt install -y mpv socat
