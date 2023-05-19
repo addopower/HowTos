@@ -24,3 +24,5 @@ apt remove unattended-upgrades
 IN UBUNTU 22.04
 
 apt remove brltty
+
+apt install socat
