@@ -1,7 +1,7 @@
 sudo apt install mysql-server
 sudo mysql -u root
 
-CREATE USER 'utente'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'comma6a'@'localhost' IDENTIFIED BY 'comma6a';
 GRANT ALL PRIVILEGES ON *.* TO 'utente'@'localhost' WITH GRANT OPTION;
 exit
 
