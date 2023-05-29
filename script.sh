@@ -1,7 +1,7 @@
 apt update
 apt install -y mysql-server
 mysql --user="root" --execute="CREATE USER 'comma6a'@'localhost' IDENTIFIED BY 'comma6a';GRANT ALL PRIVILEGES ON *.* TO 'comma6a'@'localhost' WITH GRANT OPTION;"
-mysql --user="comma6a" --password="comma6a" --execute="CREATE DATABASE NOME_DB;"
+mysql --user="comma6a" --password="comma6a" --execute="CREATE DATABASE SERVER;"
 printf "[Unit]
 Description=SlotServer daemon
 
@@ -14,7 +14,8 @@ WorkingDirectory=/home/ubuntu
 ExecStart=/home/ubuntu/ServerWSPrimario
 
 [Install]
-WantedBy=multi-user.target" > /etc/systemd/system/ServerWSPrimario.service
+WantedBy=multi-user.target
+" > /etc/systemd/system/ServerWSPrimario.service
 
 printf "[Unit]
 Description=SlotServer daemon
@@ -28,7 +29,8 @@ WorkingDirectory=/home/ubuntu
 ExecStart=/home/ubuntu/ServerHTTP
 
 [Install]
-WantedBy=multi-user.target" > /etc/systemd/system/ServerHTTP.service
+WantedBy=multi-user.target
+" > /etc/systemd/system/ServerHTTP.service
 
 systemctl daemon-reload 
 systemctl enable ServerHTTP.service 
