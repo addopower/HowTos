@@ -25,4 +25,8 @@ IN UBUNTU 22.04
 
 apt remove brltty
 
+<<<<<<< HEAD
 apt install -y mpv socat
+=======
+apt install -y mpv socat
+>>>>>>> 586b612 (pull robaltre)
