@@ -1,5 +1,6 @@
 apt update
-apt install -y mysql-server
+apt upgrade -y
+apt install -y mysql-server libjsoncpp25 libmariadb3 python3-matplotlib python3-numpy
 mysql --user="root" --execute="CREATE USER 'comma6a'@'localhost' IDENTIFIED BY 'comma6a';GRANT ALL PRIVILEGES ON *.* TO 'comma6a'@'localhost' WITH GRANT OPTION;"
 mysql --user="comma6a" --password="comma6a" --execute="CREATE DATABASE SERVER;"
 printf "[Unit]
