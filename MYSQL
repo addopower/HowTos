@@ -20,3 +20,17 @@ SELECT * FROM SERVER_GOL.LOG_MESSAGGI WHERE JSON_EXTRACT(JSON_UNQUOTE(JSON_EXTRA
 USARE I DATI DA UNA TABELLA PER RICERCHE IN ALTRE TABELLE, UTILE QUANDO SI CERCANO DATI USANDO CSV
 
 SELECT play as puntato, win as vinto, id_session_integration as id FROM SERVER_GOL.Sessions s WHERE id_session_integration IN ( SELECT DISTINCT id_session FROM SERVER_GOL.NewTable nt)
+
+SELECT 
+    s.play as puntato, 
+    s.win as vinto, 
+    s.id_session_integration as id, 
+    COUNT(s2.`_id`) as mosse 
+FROM 
+    SERVER_GOL.Sessions s 
+JOIN 
+    SERVER_GOL.Spins s2 ON s2.id_session = s.`_id`  
+WHERE 
+    s.id_session_integration IN (SELECT DISTINCT CIAONE FROM SERVER_GOL.appendi a)
+GROUP BY 
+    s.play, s.win, s.id_session_integration;
