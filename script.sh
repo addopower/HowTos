@@ -3,7 +3,9 @@ curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
 apt update
 apt upgrade -y
-apt install -y mysql-server libjsoncpp25 libmariadb3 python3-matplotlib python3-numpy redis libhiredis*
+apt install -y mysql-server libjsoncpp25 libmariadb3 python3-matplotlib python3-numpy redis libhiredis* jq snapd
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
 apt remove unattended-upgrades
 echo "" >> "/etc/mysql/my.cnf"
 echo "[mysqld]" >> "/etc/mysql/my.cnf"
@@ -31,7 +33,7 @@ RestartSec=3
 User=root
 TasksMax=100000
 WorkingDirectory=%%s
-ExecStart=%%s/ServerWS -p \%i
+ExecStart=%%s/ServerWS -p %%i
 
 [Install]
 WantedBy=multi-user.target
@@ -46,6 +48,8 @@ systemctl enable ServerWS\$i.service
 systemctl start ServerWS\$i.service
 done
 " > script_start.sh
+
+chmod +x script_start.sh
 
 touch script_stop.sh
 
@@ -63,6 +67,8 @@ done
 systemctl daemon-reload
 " > script_stop.sh
 
+chmod +x script_stop.sh
+
 touch script_restart.sh
 
 printf "#!/bin/bash
@@ -75,6 +81,8 @@ do
 	systemctl restart ServerWS\$i.service
 done
 " > script_restart.sh
+
+chmod +x script_restart.sh
 
 touch cambia.sh
 
@@ -96,6 +104,28 @@ fi
 echo \$new_content > /root/porta_server_ws.txt
 cat /root/porta_server_ws.txt
 " > cambia.sh
+
+chmod +x cambia.sh
+
+touch /etc/systemd/system/ServerHTTP.service
+
+
+printf "[Unit]
+Description=SlotServer daemon
+
+[Service]
+Restart=always
+RestartSec=3
+User=root
+TasksMax=100000
+WorkingDirectory=%s
+ExecStart=%s/ServerHTTP
+
+[Install]
+WantedBy=multi-user.target
+" $HOME $HOME > /etc/systemd/system/ServerHTTP.service
+
+certbot certonly --standalone
 
 ./script_start.sh
 
