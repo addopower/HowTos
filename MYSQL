@@ -34,3 +34,55 @@ WHERE
     s.id_session_integration IN (SELECT DISTINCT CIAONE FROM SERVER_GOL.appendi a)
 GROUP BY 
     s.play, s.win, s.id_session_integration;
+
+
+SPOSTARE PARTIZIONI O ROBA DA ALTRA PARTE
+
+controlla che mysql ha accesso alla nuova path:
+
+sudo -u mysql ls /new/path/yourdatabase
+
+se non ha accesso chmodda tutt la path:
+
+chmod a+x  /new  /new/path  /new/path/yourdatabase
+
+poi sposta le cose nella nuova path, crea il symbolic link e chownalo, per esempio in questo script è automatico:
+
+#!/bin/bash
+
+# Directory di origine e di destinazione
+source_dir="/var/lib/mysql/SERVER_GOL/"
+dest_dir="/home/ubuntu/SpinsDisk/"
+
+# Trova tutti i file che iniziano con "Spins#p#p_2023" nella directory di origine
+files=$(ls ${source_dir}Spins#p#p_2023*.ibd)
+
+# Crea i collegamenti simbolici
+for file in $files; do
+    filename=$(basename "$file")
+    mv "$source_dir$filename" "$dest_dir$filename"
+    ln -s "$dest_dir$filename" "$source_dir$filename"
+    chown mysql:mysql "$source_dir$filename"
+    echo done "$source_dir$filename"
+done
+
+echo "Collegamenti simbolici creati con successo!"
+
+
+poi aggiorna apparmor:
+
+sudo nano /etc/apparmor.d/usr.sbin.mysqld
+
+add lines:
+
+/new-db-path/ r,
+/new-db-path/** rwk,
+
+NON DIMENTICARE L'ULTIMA VIRGOLA **/
+
+poi fai
+
+apparmor_parser -r /etc/apparmor.d/usr.sbin.mysqld
+
+
+riavvia mysql

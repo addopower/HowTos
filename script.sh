@@ -6,13 +6,13 @@ apt upgrade -y
 apt install -y mysql-server libjsoncpp25 libmariadb3 python3-matplotlib python3-numpy redis libhiredis* jq snapd
 snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
-apt remove unattended-upgrades
+apt remove -y unattended-upgrades
 echo "" >> "/etc/mysql/my.cnf"
 echo "[mysqld]" >> "/etc/mysql/my.cnf"
 echo "binlog_expire_logs_seconds=1" >> "/etc/mysql/my.cnf"
 echo "max_connections=1000" >> "/etc/mysql/my.cnf"
 mysql --user="root" --execute="CREATE USER 'comma6a'@'localhost' IDENTIFIED BY 'comma6a';GRANT ALL PRIVILEGES ON *.* TO 'comma6a'@'localhost' WITH GRANT OPTION;"
-#mysql --user="comma6a" --password="comma6a" --execute="CREATE DATABASE SERVER;"
+mysql --user="comma6a" --password="comma6a" --execute="CREATE DATABASE SERVER;"
 echo "32181" > porta_server_ws.txt
 echo "{\"prima\":32181,\"ultima\":32190}" > porte_server_ws.json
 
