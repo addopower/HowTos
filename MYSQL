@@ -38,6 +38,8 @@ GROUP BY
 
 SPOSTARE PARTIZIONI O ROBA DA ALTRA PARTE
 
+stoppa mysql
+
 controlla che mysql ha accesso alla nuova path:
 
 sudo -u mysql ls /new/path/yourdatabase
@@ -84,5 +86,4 @@ poi fai
 
 apparmor_parser -r /etc/apparmor.d/usr.sbin.mysqld
 
-
-riavvia mysql
+avvia mysql
